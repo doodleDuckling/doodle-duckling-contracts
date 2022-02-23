@@ -1,0 +1,8 @@
+/secrets.json
+/node_modules
+/cache
+/artifacts
+/.idea
+/package-lock.json
+/contracts-developing
+/contracts-backend

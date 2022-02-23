@@ -1,0 +1,28 @@
+{
+  "name": "doodleduckling-contracts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx hardhat test --network ganache test/Box.proxy.js",
+    "compile": "npx hardhat compile",
+    "deploy": "npx hardhat run --network bsc scripts/deploy.DoodleDucklingStamp.js",
+    "flatten": "npx hardhat flatten contracts/DoodleDucklingStamp.sol > contracts-flattened/DoodleDucklingStamp.sol"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.3",
+    "@openzeppelin/hardhat-upgrades": "^1.12.0",
+    "chai": "^4.3.4",
+    "ethers": "^5.5.2",
+    "hardhat": "^2.8.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.1",
+    "@openzeppelin/contracts-upgradeable": "^4.4.1",
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.2.27"
+  }
+}
