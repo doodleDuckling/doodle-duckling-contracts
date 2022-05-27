@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx hardhat test --network ganache test/Box.proxy.js",
+    "test": "npx hardhat test --network ganache test/doodleDucklingRandmon-test.js",
     "compile": "npx hardhat compile",
-    "deploy": "npx hardhat run --network bsc scripts/deploy.DoodleDucklingStamp.js",
-    "flatten": "npx hardhat flatten contracts/DoodleDucklingStamp.sol > contracts-flattened/DoodleDucklingStamp.sol"
+    "deploy": "npx hardhat run --network bsc scripts/deploy.DoodleDucklingStamp2.js",
+    "flatten": "npx hardhat flatten contracts/DoodleDuckling.sol > contracts-flattened/DoodleDuckling.sol"
   },
   "keywords": [],
   "author": "",

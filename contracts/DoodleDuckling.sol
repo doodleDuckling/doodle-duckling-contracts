@@ -13,19 +13,22 @@ contract DoodleDuckling is ERC721, Ownable
     using MerkleProof for *;
 
     uint256 public price = 60000000000000000;//0.06 ETH
+    uint256 public specialPrice = 30000000000000000;//0.03 ETH
     uint256 public MAX_AMOUNT = 8888;
-    uint public constant maxPurchaseOnce = 10;
-    uint public constant maxPurchaseOnePerson = 10;
+    uint public constant maxPurchaseOnePerson = 5;
     bool public saleIsActive = false;
-    bool public nonWhitelistIsActive = false;
+    bool public earlyBirdIsActive = true;
+    bool public freeMintIsActive = true;
     address payable public payee;
-    bytes32 public merkleRoot;
+    bytes32 public earlyBirdMerkleRoot;
+    bytes32 public freeMintMerkleRoot;
+    string public baseURI;
 
     mapping(address => uint) public userPurchaseList;
+    mapping(address => bool) public freeMintedList;
 
-    constructor(address payable payee_, bytes32 root) ERC721("Doodle Duckling", "DOODLE DUCKLING") {
+    constructor(address payable payee_) ERC721("Doodle Duckling", "DOODLE DUCKLING") {
         payee = payee_;
-        merkleRoot = root;
     }
 
     function mint(address to, uint256 tokenId) external onlyOwner {
@@ -36,40 +39,76 @@ contract DoodleDuckling is ERC721, Ownable
         _burn(tokenId);
     }
 
-    function contractURI() public pure returns (string memory) {
-        return "ipfs://QmcaZT1asEtVEGj2Rjvgxj8Kvsftad6qpxdZ848sZqyZQc";
+    function changeBaseURI(string memory newUri) public onlyOwner {
+        baseURI = newUri;
     }
 
-    function _baseURI() internal override view virtual returns (string memory) {
-        return "ipfs://QmZPQm7GD9hFRUFsxdZzZhWH5V1p35m7o1aJucER1cUSH6/";
+    function _baseURI() internal view virtual override returns (string memory) {
+        return baseURI;
     }
 
-    function updateMerkleRoot(bytes32 root) public onlyOwner {
-        merkleRoot = root;
+    function updateEarlyBirdMerkleRoot(bytes32 root) public onlyOwner {
+        earlyBirdMerkleRoot = root;
+    }
+
+    function updateFreeMintMerkleRoot(bytes32 root) public onlyOwner {
+        freeMintMerkleRoot = root;
     }
 
     function flipSaleState() public onlyOwner {
         saleIsActive = !saleIsActive;
     }
 
-    function flipNonWhitelistState() public onlyOwner {
-        nonWhitelistIsActive = !nonWhitelistIsActive;
+    function flipEarlyBirdIState() public onlyOwner {
+        earlyBirdIsActive = !earlyBirdIsActive;
     }
 
-    function updatePrice(uint newPrice) public onlyOwner {
-        nonWhitelistIsActive = true;
-        price = newPrice;
+    function flipFreeMintState() public onlyOwner {
+        freeMintIsActive = !freeMintIsActive;
     }
 
     function mintDoodleDuckling(uint numberOfTokens, bytes32[] memory proof) public payable {
-        require(saleIsActive, "Sale must be active to mint");
-        require(numberOfTokens > 0, "Purchase number must be above 0");
-        require(numberOfTokens <= maxPurchaseOnePerson, "Can only buy 10 at a time");
-        require(_tokenId.current() + numberOfTokens <= MAX_AMOUNT, "Purchase would exceed max supply");
-        require(nonWhitelistIsActive || userPurchaseList[_msgSender()] <= maxPurchaseOnePerson, "During the whitelist period, a person can buy a maximum of 10 ducklings");
-        require(checkPurchaseQualification(proof), "You have no purchase qualification");
+//        require(saleIsActive, "Sale must be active to mint");
+//        require(numberOfTokens > 0, "Purchase number must be above 0");
+//        require(numberOfTokens <= maxPurchaseOnePerson, "Can only buy 5 at a time");
+//        require(_tokenId.current() + numberOfTokens <= MAX_AMOUNT, "Purchase would exceed max supply");
+//        require(userPurchaseList[_msgSender()] + numberOfTokens <= maxPurchaseOnePerson, "A person can only buy five at most");
+//
+//        bool isEarlyBird = earlyBirdIsActive && checkWhitelist(earlyBirdMerkleRoot, proof);
+//        bool isFreeMint = freeMintIsActive && !freeMintedList[_msgSender()] && checkWhitelist(freeMintMerkleRoot, proof);
+//
+//        //calculate fee
+//        uint fee = 0;
+//        if (isFreeMint) {
+//            if (isEarlyBird) {
+//                if (numberOfTokens > 1) {
+//                    fee = specialPrice * (numberOfTokens - 1);
+//                } else {
+//                    fee = 0;
+//                }
+//            } else {
+//                if (numberOfTokens > 1) {
+//                    fee = price * (numberOfTokens - 1);
+//                } else {
+//                    fee = 0;
+//                }
+//            }
+//            if (!freeMintedList[_msgSender()]) {
+//                freeMintedList[_msgSender()] = true;
+//            }
+//        } else {
+//            if (isEarlyBird) {
+//                fee = specialPrice * numberOfTokens;
+//            } else {
+//                fee = price * numberOfTokens;
+//            }
+//        }
+        (uint256 fee,bool isFreeMint) = calculateFee(numberOfTokens,proof);
+        if (isFreeMint && !freeMintedList[_msgSender()]) {
+            freeMintedList[_msgSender()] = true;
+        }
 
-        uint fee = price * numberOfTokens;
+        //todo : check safety of transferring fee in this way
         require(fee == msg.value, "Value sent is not correct");
         payee.transfer(fee);
 
@@ -79,6 +118,41 @@ contract DoodleDuckling is ERC721, Ownable
         }
 
         userPurchaseList[_msgSender()] += numberOfTokens;
+    }
+
+    function calculateFee(uint numberOfTokens, bytes32[] memory proof) public view returns(uint256 fee,bool isFreeMint){
+        require(saleIsActive, "Sale must be active to mint");
+        require(numberOfTokens > 0, "Purchase number must be above 0");
+        require(numberOfTokens <= maxPurchaseOnePerson, "Can only buy 5 at a time");
+        require(_tokenId.current() + numberOfTokens <= MAX_AMOUNT, "Purchase would exceed max supply");
+        require(userPurchaseList[_msgSender()] + numberOfTokens <= maxPurchaseOnePerson, "A person can only buy five at most");
+
+        bool isEarlyBird = earlyBirdIsActive && checkWhitelist(earlyBirdMerkleRoot, proof);
+        isFreeMint = freeMintIsActive && !freeMintedList[_msgSender()] && checkWhitelist(freeMintMerkleRoot, proof);
+
+        //calculate fee
+        fee = 0;
+        if (isFreeMint) {
+            if (isEarlyBird) {
+                if (numberOfTokens > 1) {
+                    fee = specialPrice * (numberOfTokens - 1);
+                } else {
+                    fee = 0;
+                }
+            } else {
+                if (numberOfTokens > 1) {
+                    fee = price * (numberOfTokens - 1);
+                } else {
+                    fee = 0;
+                }
+            }
+        } else {
+            if (isEarlyBird) {
+                fee = specialPrice * numberOfTokens;
+            } else {
+                fee = price * numberOfTokens;
+            }
+        }
     }
 
     function ownerMint(address[] memory accounts) public onlyOwner {
@@ -94,7 +168,7 @@ contract DoodleDuckling is ERC721, Ownable
         return MAX_AMOUNT - _tokenId.current();
     }
 
-    function checkPurchaseQualification(bytes32[] memory proof) public view returns (bool){
-        return nonWhitelistIsActive || MerkleProof.verify(proof, merkleRoot, keccak256(abi.encodePacked(_msgSender())));
+    function checkWhitelist(bytes32 root, bytes32[] memory proof) public view returns (bool){
+        return MerkleProof.verify(proof, root, keccak256(abi.encodePacked(_msgSender())));
     }
 }

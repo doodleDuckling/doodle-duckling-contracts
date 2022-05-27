@@ -128,13 +128,13 @@
           {
             "contract": "DoodleDucklingStamp",
             "label": "userList",
-            "type": "t_mapping(t_address,t_struct(User)2160_storage)",
+            "type": "t_mapping(t_address,t_struct(User)4432_storage)",
             "src": "contracts\\DoodleDucklingStamp.sol:31"
           },
           {
             "contract": "DoodleDucklingStamp",
             "label": "stampList",
-            "type": "t_mapping(t_uint256,t_struct(Stamp)2155_storage)",
+            "type": "t_mapping(t_uint256,t_struct(Stamp)4427_storage)",
             "src": "contracts\\DoodleDucklingStamp.sol:32"
           },
           {
@@ -172,13 +172,13 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_mapping(t_address,t_struct(User)2160_storage)": {
+          "t_mapping(t_address,t_struct(User)4432_storage)": {
             "label": "mapping(address => struct DoodleDucklingStamp.User)"
           },
           "t_address": {
             "label": "address"
           },
-          "t_struct(User)2160_storage": {
+          "t_struct(User)4432_storage": {
             "label": "struct DoodleDucklingStamp.User",
             "members": [
               {
@@ -194,10 +194,10 @@
           "t_bool": {
             "label": "bool"
           },
-          "t_mapping(t_uint256,t_struct(Stamp)2155_storage)": {
+          "t_mapping(t_uint256,t_struct(Stamp)4427_storage)": {
             "label": "mapping(uint256 => struct DoodleDucklingStamp.Stamp)"
           },
-          "t_struct(Stamp)2155_storage": {
+          "t_struct(Stamp)4427_storage": {
             "label": "struct DoodleDucklingStamp.Stamp",
             "members": [
               {
@@ -228,6 +228,582 @@
           },
           "t_mapping(t_address,t_uint256)": {
             "label": "mapping(address => uint256)"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+            "label": "mapping(address => mapping(address => bool))"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_array(t_uint256)47_storage": {
+            "label": "uint256[47]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "7c4703187c306ad8b05141d586c3624d14f666d9b75b2ebba128e052efbd17b3": {
+      "address": "0x64C83bD86A3763EA551731175B8f89e729442509",
+      "txHash": "0x0c6a01e77d101035f3ad77076206b7e1949834087891d719e9f19ba410dbefd1",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "ERC165Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:36"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_balances",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:25"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_operatorApprovals",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:28"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_uri",
+            "type": "t_string_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:31"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)47_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:471"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:22"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:82"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "name",
+            "type": "t_string_storage",
+            "src": "contracts\\DoodleDucklingStamp2.sol:14"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "symbol",
+            "type": "t_string_storage",
+            "src": "contracts\\DoodleDucklingStamp2.sol:16"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "_tokenId",
+            "type": "t_struct(Counter)1795_storage",
+            "src": "contracts\\DoodleDucklingStamp2.sol:19"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "userList",
+            "type": "t_mapping(t_address,t_struct(User)5194_storage)",
+            "src": "contracts\\DoodleDucklingStamp2.sol:32"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "stampList",
+            "type": "t_mapping(t_uint256,t_struct(Stamp)5189_storage)",
+            "src": "contracts\\DoodleDucklingStamp2.sol:33"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "stamps",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "contracts\\DoodleDucklingStamp2.sol:34"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "isStopped",
+            "type": "t_bool",
+            "src": "contracts\\DoodleDucklingStamp2.sol:36"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "nonWhitelistIsActive",
+            "type": "t_bool",
+            "src": "contracts\\DoodleDucklingStamp2.sol:37"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "commonClaimCardRule",
+            "type": "t_struct(CommonClaimCardRule)5222_storage",
+            "src": "contracts\\DoodleDucklingStamp2.sol:54"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "specialClaimCardRuleList",
+            "type": "t_mapping(t_uint256,t_struct(SpecialClaimCardRule)5231_storage)",
+            "src": "contracts\\DoodleDucklingStamp2.sol:55"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "specialClaimCardClaimedList",
+            "type": "t_mapping(t_address,t_mapping(t_uint256,t_bool))",
+            "src": "contracts\\DoodleDucklingStamp2.sol:56"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "userClaimTimes",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "contracts\\DoodleDucklingStamp2.sol:58"
+          },
+          {
+            "contract": "DoodleDucklingStamp2",
+            "label": "totalCommonClaimed",
+            "type": "t_uint256",
+            "src": "contracts\\DoodleDucklingStamp2.sol:59"
+          }
+        ],
+        "types": {
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Counter)1795_storage": {
+            "label": "struct CountersUpgradeable.Counter",
+            "members": [
+              {
+                "label": "_value",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_mapping(t_address,t_struct(User)5194_storage)": {
+            "label": "mapping(address => struct DoodleDucklingStamp2.User)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_struct(User)5194_storage": {
+            "label": "struct DoodleDucklingStamp2.User",
+            "members": [
+              {
+                "label": "lastDrawTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "isWhitelisted",
+                "type": "t_bool"
+              }
+            ]
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_mapping(t_uint256,t_struct(Stamp)5189_storage)": {
+            "label": "mapping(uint256 => struct DoodleDucklingStamp2.Stamp)"
+          },
+          "t_struct(Stamp)5189_storage": {
+            "label": "struct DoodleDucklingStamp2.Stamp",
+            "members": [
+              {
+                "label": "totalAmount",
+                "type": "t_uint256"
+              },
+              {
+                "label": "remainAmount",
+                "type": "t_uint256"
+              },
+              {
+                "label": "rarity",
+                "type": "t_uint8"
+              }
+            ]
+          },
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_struct(CommonClaimCardRule)5222_storage": {
+            "label": "struct DoodleDucklingStamp2.CommonClaimCardRule",
+            "members": [
+              {
+                "label": "startTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "stampIds",
+                "type": "t_array(t_uint256)dyn_storage"
+              },
+              {
+                "label": "probabilities",
+                "type": "t_array(t_uint256)dyn_storage"
+              }
+            ]
+          },
+          "t_mapping(t_uint256,t_struct(SpecialClaimCardRule)5231_storage)": {
+            "label": "mapping(uint256 => struct DoodleDucklingStamp2.SpecialClaimCardRule)"
+          },
+          "t_struct(SpecialClaimCardRule)5231_storage": {
+            "label": "struct DoodleDucklingStamp2.SpecialClaimCardRule",
+            "members": [
+              {
+                "label": "startTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "stampId",
+                "type": "t_uint256"
+              },
+              {
+                "label": "merkleRoot",
+                "type": "t_bytes32"
+              }
+            ]
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          },
+          "t_mapping(t_address,t_mapping(t_uint256,t_bool))": {
+            "label": "mapping(address => mapping(uint256 => bool))"
+          },
+          "t_mapping(t_uint256,t_bool)": {
+            "label": "mapping(uint256 => bool)"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(uint256 => mapping(address => uint256))"
+          },
+          "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+            "label": "mapping(address => mapping(address => bool))"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_array(t_uint256)47_storage": {
+            "label": "uint256[47]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "e7964f80cde70abdbd7af0b9cc7053501f8066bd8caed14fef41a6f63f36c817": {
+      "address": "0xf6cD251038b888bD4EE52C8604DD3a54b0B0FC45",
+      "txHash": "0x81f9e33c1edfc1b3644fcb1e2beba32568eed5747de3a8d62994450a5ecbf07e",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "_initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:39"
+          },
+          {
+            "contract": "Initializable",
+            "label": "_initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:44"
+          },
+          {
+            "contract": "ContextUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\ContextUpgradeable.sol:31"
+          },
+          {
+            "contract": "ERC165Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\utils\\introspection\\ERC165Upgradeable.sol:36"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_balances",
+            "type": "t_mapping(t_uint256,t_mapping(t_address,t_uint256))",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:25"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_operatorApprovals",
+            "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:28"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "_uri",
+            "type": "t_string_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:31"
+          },
+          {
+            "contract": "ERC1155Upgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)47_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\token\\ERC1155\\ERC1155Upgradeable.sol:471"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:22"
+          },
+          {
+            "contract": "OwnableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:82"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "name",
+            "type": "t_string_storage",
+            "src": "contracts\\DoodleDucklingStamp3.sol:14"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "symbol",
+            "type": "t_string_storage",
+            "src": "contracts\\DoodleDucklingStamp3.sol:16"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "_tokenId",
+            "type": "t_struct(Counter)1795_storage",
+            "src": "contracts\\DoodleDucklingStamp3.sol:19"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "userList",
+            "type": "t_mapping(t_address,t_struct(User)6006_storage)",
+            "src": "contracts\\DoodleDucklingStamp3.sol:32"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "stampList",
+            "type": "t_mapping(t_uint256,t_struct(Stamp)6001_storage)",
+            "src": "contracts\\DoodleDucklingStamp3.sol:33"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "stamps",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "contracts\\DoodleDucklingStamp3.sol:34"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "isStopped",
+            "type": "t_bool",
+            "src": "contracts\\DoodleDucklingStamp3.sol:36"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "nonWhitelistIsActive",
+            "type": "t_bool",
+            "src": "contracts\\DoodleDucklingStamp3.sol:37"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "commonClaimCardRule",
+            "type": "t_struct(CommonClaimCardRule)6034_storage",
+            "src": "contracts\\DoodleDucklingStamp3.sol:55"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "specialClaimCardRuleList",
+            "type": "t_mapping(t_uint256,t_struct(SpecialClaimCardRule)6045_storage)",
+            "src": "contracts\\DoodleDucklingStamp3.sol:56"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "specialClaimCardClaimedList",
+            "type": "t_mapping(t_address,t_mapping(t_uint256,t_bool))",
+            "src": "contracts\\DoodleDucklingStamp3.sol:57"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "userClaimTimes",
+            "type": "t_mapping(t_address,t_uint256)",
+            "src": "contracts\\DoodleDucklingStamp3.sol:59"
+          },
+          {
+            "contract": "DoodleDucklingStamp3",
+            "label": "totalCommonClaimed",
+            "type": "t_uint256",
+            "src": "contracts\\DoodleDucklingStamp3.sol:60"
+          }
+        ],
+        "types": {
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Counter)1795_storage": {
+            "label": "struct CountersUpgradeable.Counter",
+            "members": [
+              {
+                "label": "_value",
+                "type": "t_uint256"
+              }
+            ]
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_mapping(t_address,t_struct(User)6006_storage)": {
+            "label": "mapping(address => struct DoodleDucklingStamp3.User)"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_struct(User)6006_storage": {
+            "label": "struct DoodleDucklingStamp3.User",
+            "members": [
+              {
+                "label": "lastDrawTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "isWhitelisted",
+                "type": "t_bool"
+              }
+            ]
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_mapping(t_uint256,t_struct(Stamp)6001_storage)": {
+            "label": "mapping(uint256 => struct DoodleDucklingStamp3.Stamp)"
+          },
+          "t_struct(Stamp)6001_storage": {
+            "label": "struct DoodleDucklingStamp3.Stamp",
+            "members": [
+              {
+                "label": "totalAmount",
+                "type": "t_uint256"
+              },
+              {
+                "label": "remainAmount",
+                "type": "t_uint256"
+              },
+              {
+                "label": "rarity",
+                "type": "t_uint8"
+              }
+            ]
+          },
+          "t_uint8": {
+            "label": "uint8"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_struct(CommonClaimCardRule)6034_storage": {
+            "label": "struct DoodleDucklingStamp3.CommonClaimCardRule",
+            "members": [
+              {
+                "label": "startTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "stampIds",
+                "type": "t_array(t_uint256)dyn_storage"
+              },
+              {
+                "label": "probabilities",
+                "type": "t_array(t_uint256)dyn_storage"
+              }
+            ]
+          },
+          "t_mapping(t_uint256,t_struct(SpecialClaimCardRule)6045_storage)": {
+            "label": "mapping(uint256 => struct DoodleDucklingStamp3.SpecialClaimCardRule)"
+          },
+          "t_struct(SpecialClaimCardRule)6045_storage": {
+            "label": "struct DoodleDucklingStamp3.SpecialClaimCardRule",
+            "members": [
+              {
+                "label": "startTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256"
+              },
+              {
+                "label": "stampId",
+                "type": "t_uint256"
+              },
+              {
+                "label": "merkleRoot",
+                "type": "t_bytes32"
+              },
+              {
+                "label": "everyoneCanClaim",
+                "type": "t_bool"
+              }
+            ]
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          },
+          "t_mapping(t_address,t_mapping(t_uint256,t_bool))": {
+            "label": "mapping(address => mapping(uint256 => bool))"
+          },
+          "t_mapping(t_uint256,t_bool)": {
+            "label": "mapping(uint256 => bool)"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_mapping(t_uint256,t_mapping(t_address,t_uint256))": {
+            "label": "mapping(uint256 => mapping(address => uint256))"
           },
           "t_mapping(t_address,t_mapping(t_address,t_bool))": {
             "label": "mapping(address => mapping(address => bool))"

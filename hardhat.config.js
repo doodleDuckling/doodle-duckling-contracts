@@ -28,11 +28,15 @@ module.exports = {
         },
         ganache: {
             url: 'http://127.0.0.1:7545',
+            accounts: ['0xe4d049df90ef78f45079810dcec2f039e300f987631f043a2797a864b00d59da']
+        },
+        bsc: {
+            url: `https://bsc-dataseed1.ninicoin.io/`,
             accounts: {mnemonic: mnemonic}
         },
-        // bsc: {
-        //     url: `https://bsc-dataseed1.ninicoin.io/`,
-        //     accounts: ['0x']
-        // }
+        bsctest: {
+            url: `https://data-seed-prebsc-1-s1.binance.org:8545/`,
+            accounts: {mnemonic: mnemonic}
+        }
     }
 };
