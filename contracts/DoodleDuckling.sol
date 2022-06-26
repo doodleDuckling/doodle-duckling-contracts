@@ -12,23 +12,19 @@ contract DoodleDuckling is ERC721, Ownable
     Counters.Counter private _tokenId;
     using MerkleProof for *;
 
-    uint256 public price = 60000000000000000;//0.06 ETH
-    uint256 public specialPrice = 30000000000000000;//0.03 ETH
+    uint256 public price = 50000000000000000;//0.05 ETH
     uint256 public MAX_AMOUNT = 8888;
-    uint public constant maxPurchaseOnePerson = 5;
     bool public saleIsActive = false;
-    bool public earlyBirdIsActive = true;
     bool public freeMintIsActive = true;
     address payable public payee;
-    bytes32 public earlyBirdMerkleRoot;
     bytes32 public freeMintMerkleRoot;
     string public baseURI;
 
-    mapping(address => uint) public userPurchaseList;
     mapping(address => bool) public freeMintedList;
 
-    constructor(address payable payee_) ERC721("Doodle Duckling", "DOODLE DUCKLING") {
+    constructor(address payable payee_,string memory baseURI_) ERC721("Doodle Duckling", "DOODLE DUCKLING") {
         payee = payee_;
+        baseURI = baseURI_;
     }
 
     function mint(address to, uint256 tokenId) external onlyOwner {
@@ -47,10 +43,6 @@ contract DoodleDuckling is ERC721, Ownable
         return baseURI;
     }
 
-    function updateEarlyBirdMerkleRoot(bytes32 root) public onlyOwner {
-        earlyBirdMerkleRoot = root;
-    }
-
     function updateFreeMintMerkleRoot(bytes32 root) public onlyOwner {
         freeMintMerkleRoot = root;
     }
@@ -59,99 +51,31 @@ contract DoodleDuckling is ERC721, Ownable
         saleIsActive = !saleIsActive;
     }
 
-    function flipEarlyBirdIState() public onlyOwner {
-        earlyBirdIsActive = !earlyBirdIsActive;
-    }
-
     function flipFreeMintState() public onlyOwner {
         freeMintIsActive = !freeMintIsActive;
     }
 
-    function mintDoodleDuckling(uint numberOfTokens, bytes32[] memory proof) public payable {
-//        require(saleIsActive, "Sale must be active to mint");
-//        require(numberOfTokens > 0, "Purchase number must be above 0");
-//        require(numberOfTokens <= maxPurchaseOnePerson, "Can only buy 5 at a time");
-//        require(_tokenId.current() + numberOfTokens <= MAX_AMOUNT, "Purchase would exceed max supply");
-//        require(userPurchaseList[_msgSender()] + numberOfTokens <= maxPurchaseOnePerson, "A person can only buy five at most");
-//
-//        bool isEarlyBird = earlyBirdIsActive && checkWhitelist(earlyBirdMerkleRoot, proof);
-//        bool isFreeMint = freeMintIsActive && !freeMintedList[_msgSender()] && checkWhitelist(freeMintMerkleRoot, proof);
-//
-//        //calculate fee
-//        uint fee = 0;
-//        if (isFreeMint) {
-//            if (isEarlyBird) {
-//                if (numberOfTokens > 1) {
-//                    fee = specialPrice * (numberOfTokens - 1);
-//                } else {
-//                    fee = 0;
-//                }
-//            } else {
-//                if (numberOfTokens > 1) {
-//                    fee = price * (numberOfTokens - 1);
-//                } else {
-//                    fee = 0;
-//                }
-//            }
-//            if (!freeMintedList[_msgSender()]) {
-//                freeMintedList[_msgSender()] = true;
-//            }
-//        } else {
-//            if (isEarlyBird) {
-//                fee = specialPrice * numberOfTokens;
-//            } else {
-//                fee = price * numberOfTokens;
-//            }
-//        }
-        (uint256 fee,bool isFreeMint) = calculateFee(numberOfTokens,proof);
-        if (isFreeMint && !freeMintedList[_msgSender()]) {
-            freeMintedList[_msgSender()] = true;
-        }
+    function freeMint(bytes32[] memory proof) public {
+        require(freeMintIsActive, "Free mint is not available");
+        require(_tokenId.current() + 1 <= MAX_AMOUNT, "No more Ducklings");
+        require(checkWhitelist(freeMintMerkleRoot, proof),"You are not in whitelist");
+        require(!freeMintedList[_msgSender()],"You have free minted");
+        _tokenId.increment();
+        _mint(_msgSender(), _tokenId.current());
+        freeMintedList[_msgSender()] = true;
+    }
 
-        //todo : check safety of transferring fee in this way
+    function buy(uint256 buyNum) public payable {
+        require(saleIsActive, "Buy is not available");
+        require(buyNum > 0, "Purchase number must be above 0");
+        require(_tokenId.current() + buyNum <= MAX_AMOUNT, "Purchase would exceed max supply");
+        uint256 fee = price * buyNum;
         require(fee == msg.value, "Value sent is not correct");
         payee.transfer(fee);
 
-        for (uint i = 0; i < numberOfTokens; i++) {
+        for (uint i = 0; i < buyNum; i++) {
             _tokenId.increment();
             _mint(_msgSender(), _tokenId.current());
-        }
-
-        userPurchaseList[_msgSender()] += numberOfTokens;
-    }
-
-    function calculateFee(uint numberOfTokens, bytes32[] memory proof) public view returns(uint256 fee,bool isFreeMint){
-        require(saleIsActive, "Sale must be active to mint");
-        require(numberOfTokens > 0, "Purchase number must be above 0");
-        require(numberOfTokens <= maxPurchaseOnePerson, "Can only buy 5 at a time");
-        require(_tokenId.current() + numberOfTokens <= MAX_AMOUNT, "Purchase would exceed max supply");
-        require(userPurchaseList[_msgSender()] + numberOfTokens <= maxPurchaseOnePerson, "A person can only buy five at most");
-
-        bool isEarlyBird = earlyBirdIsActive && checkWhitelist(earlyBirdMerkleRoot, proof);
-        isFreeMint = freeMintIsActive && !freeMintedList[_msgSender()] && checkWhitelist(freeMintMerkleRoot, proof);
-
-        //calculate fee
-        fee = 0;
-        if (isFreeMint) {
-            if (isEarlyBird) {
-                if (numberOfTokens > 1) {
-                    fee = specialPrice * (numberOfTokens - 1);
-                } else {
-                    fee = 0;
-                }
-            } else {
-                if (numberOfTokens > 1) {
-                    fee = price * (numberOfTokens - 1);
-                } else {
-                    fee = 0;
-                }
-            }
-        } else {
-            if (isEarlyBird) {
-                fee = specialPrice * numberOfTokens;
-            } else {
-                fee = price * numberOfTokens;
-            }
         }
     }
 
