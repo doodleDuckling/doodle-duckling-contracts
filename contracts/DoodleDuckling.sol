@@ -27,14 +27,6 @@ contract DoodleDuckling is ERC721, Ownable
         baseURI = baseURI_;
     }
 
-    function mint(address to, uint256 tokenId) external onlyOwner {
-        _mint(to, tokenId);
-    }
-
-    function burn(uint256 tokenId) external onlyOwner {
-        _burn(tokenId);
-    }
-
     function changeBaseURI(string memory newUri) public onlyOwner {
         baseURI = newUri;
     }
